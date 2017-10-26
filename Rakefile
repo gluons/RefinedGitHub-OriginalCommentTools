@@ -17,7 +17,7 @@ SASS_OPTIONS = {
 }.freeze
 
 # Default task
-task default: :build
+task default: :watch
 
 # Clean task
 task :clean do
