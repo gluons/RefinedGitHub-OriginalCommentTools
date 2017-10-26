@@ -25,7 +25,7 @@ task :clean do
 end
 
 # Build task
-task build: %i(clean) do
+task build: %i[clean] do
   ensure_dir
 
   src_files = Rake::FileList['src/*.scss']
@@ -44,7 +44,7 @@ task build: %i(clean) do
 end
 
 # Watch task
-task watch: %i(clean) do
+task watch: %i[clean] do
   ensure_dir
 
   compiler = Sass::Plugin::Compiler.new(
