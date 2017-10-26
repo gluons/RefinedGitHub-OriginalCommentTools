@@ -94,3 +94,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/ruby,sass,linux,windows
+
+# Dist files
+dist/

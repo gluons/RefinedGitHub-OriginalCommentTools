@@ -1,0 +1,24 @@
+body {
+	.write-content .drag-and-drop {
+		display: block !important;
+	}
+	.toolbar-group {
+		display: inline-block !important;
+		margin-left: 20px !important;
+
+		.toolbar-item {
+			display: block !important;
+		}
+		.refined-github-upload-btn {
+			display: none !important;
+		}
+	}
+	.upload-enabled textarea {
+		&, &:focus {
+			border-bottom: {
+				style: dashed !important;
+				color: inherit !important;
+			}
+		}
+	}
+}
