@@ -11,7 +11,7 @@ end
 
 # Sass options
 SASS_OPTIONS = {
-  style: :compact,
+  style: :expanded,
   syntax: :scss,
   sourcemap: :none
 }.freeze
