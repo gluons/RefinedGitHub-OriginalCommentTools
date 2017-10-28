@@ -9,6 +9,11 @@ def ensure_dir
   Dir.mkdir('dist') unless Dir.exist?('dist')
 end
 
+# Replace dash color placeholder
+def replace_dash_color_placeholder(content)
+  content.gsub(/dash_color/, '/*[[dash_color]]*/')
+end
+
 # Sass options
 SASS_OPTIONS = {
   style: :expanded,
@@ -35,7 +40,7 @@ task build: %i[clean] do
       src_content,
       SASS_OPTIONS
     )
-    dist_content = engine.render
+    dist_content = replace_dash_color_placeholder(engine.render)
     dist_filename = File.basename(file).ext('css')
     File.write("dist/#{dist_filename}", dist_content)
   end
@@ -44,7 +49,7 @@ task build: %i[clean] do
 end
 
 # Watch task
-task watch: %i[clean] do
+task watch: %i[build] do
   ensure_dir
 
   compiler = Sass::Plugin::Compiler.new(
@@ -57,7 +62,14 @@ task watch: %i[clean] do
 
   compiler.watch do |modified|
     modified.each do |file|
-      puts "Writed #{File.basename(file).colorize(:cyan)}"
+      filename = File.basename(file)
+
+      # Replacing placeholder
+      css_filename = filename.ext('css')
+      css_filepath = "dist/#{css_filename}"
+      File.write(css_filepath, replace_dash_color_placeholder(File.read(css_filepath)), mode: 'w')
+
+      puts "#{File.basename(file).colorize(:cyan)} changed."
     end
   end
 end
