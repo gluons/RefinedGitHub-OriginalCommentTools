@@ -19,11 +19,13 @@
 			}
 		}
 		.upload-enabled textarea {
-			&, &:focus {
-				border-bottom: {
-					style: dashed !important;
-					color: dash_color !important;
-				}
+			border-bottom: {
+				style: dashed !important;
+				color: dash_color !important;
+			}
+
+			&:focus {
+				border-bottom-color: dash_color_focus !important;
 			}
 		}
 	}
