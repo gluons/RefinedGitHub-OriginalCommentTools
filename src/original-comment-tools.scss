@@ -25,7 +25,10 @@
 			}
 
 			&:focus {
-				border-bottom-color: dash_color_focus !important;
+				border-bottom: {
+					style: dashed !important;
+					color: main_color !important;
+				}
 			}
 		}
 	}

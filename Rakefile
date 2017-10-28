@@ -11,8 +11,14 @@ end
 
 # Replace placeholder
 def replace_placeholder(content)
-  content.gsub!(/\bdash_color\b/, '/*[[dash_color]]*/')
-  content.gsub!(/\bdash_color_focus\b/, '/*[[dash_color_focus]]*/')
+  placeholders = %w[dash_color main_color]
+
+  placeholders.each do |placeholder|
+    pattern = Regexp.new("\\b#{placeholder}\\b")
+    content.gsub!(pattern, "/*[[#{placeholder}]]*/")
+  end
+
+  content
 end
 
 # Sass options
@@ -68,7 +74,7 @@ task watch: %i[build] do
       # Replacing placeholder
       css_filename = filename.ext('css')
       css_filepath = "dist/#{css_filename}"
-      File.write(css_filepath, replace_placeholder(File.read(css_filepath)), mode: 'w')
+      File.write(css_filepath, replace_placeholder(File.read(css_filepath)))
 
       puts "#{File.basename(file).colorize(:cyan)} changed."
     end
